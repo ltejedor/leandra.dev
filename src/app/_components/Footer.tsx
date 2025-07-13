@@ -87,9 +87,22 @@ export function Footer() {
         </div>
         
         <div className="border-t border-white/10 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-[var(--color-text-secondary)] text-sm">
-            © 2024 Leandra Tejedor. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center sm:items-start">
+            <p className="text-[var(--color-text-secondary)] text-sm">
+              © 2024 Leandra Tejedor. All rights reserved.
+            </p>
+            <p className="text-[var(--color-text-secondary)] text-sm mt-1">
+              Made with ❤️ and{' '}
+              <a 
+                href="https://github.com/ltejedor/leandra.dev" 
+                className="hover:text-white transition-colors underline decoration-dotted underline-offset-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                open source magic
+              </a>
+            </p>
+          </div>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <a href="#" className="text-[var(--color-text-secondary)] hover:text-white text-sm transition-colors">
               Privacy Policy

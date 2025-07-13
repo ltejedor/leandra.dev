@@ -11,13 +11,14 @@ export function Header() {
     { label: "Home", href: "/", hasDropdown: false },
     {
       label: "About",
-      href: "#about",
+      href: "/about",
       hasDropdown: true,
       dropdownItems: [
-        { label: "Story", href: "#story" },
-        { label: "Events", href: "#events" },
-        { label: "Mentorship", href: "#mentorship" },
-        { label: "Speaking", href: "#speaking" },
+        { label: "Background", href: "/about#background" },
+        { label: "Press", href: "/about#press" },
+        { label: "Teaching", href: "/about#teaching" },
+        { label: "Events", href: "/about#events" },
+        { label: "Interests", href: "/about#interests" },
       ],
     },
     {
@@ -28,16 +29,6 @@ export function Header() {
         { label: "Build in Public", href: "/blog/build-in-public" },
         { label: "Tutorials", href: "/blog/tutorials" },
         { label: "Adventures", href: "/blog/adventures" },
-      ],
-    },
-    {
-      label: "Work with me",
-      href: "#work-with-me",
-      hasDropdown: true,
-      dropdownItems: [
-        { label: "Teaching", href: "#teaching" },
-        { label: "Hackathons", href: "#hackathons" },
-        { label: "Consulting", href: "#consulting" },
       ],
     },
   ];
@@ -80,7 +71,7 @@ export function Header() {
         <nav className="flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <a href="/" className="text-xl font-bold text-white hover:text-[var(--color-accent)]">
-              Leandra
+              leandra.dev
             </a>
           </div>
 
@@ -140,12 +131,7 @@ export function Header() {
                 )}
               </div>
             ))}
-            <a
-              href="#contact"
-              className="bg-[var(--color-accent)] text-white px-4 py-2 rounded-full hover:bg-[var(--color-accent-hover)] transition-colors"
-            >
-              Contact
-            </a>
+
           </div>
 
           {/* Mobile Menu Button */}
