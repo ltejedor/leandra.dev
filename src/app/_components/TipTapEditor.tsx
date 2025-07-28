@@ -101,26 +101,18 @@ export default function TipTapEditor({
       {/* Toolbar */}
       <div className="border-b border-gray-600 p-2 flex flex-wrap gap-2">
         <button
-          onClick={() => editor.chain().focus().toggleBold().run()}
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => editor.chain().focus().setParagraph().run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
-            editor.isActive('bold') 
+            editor.isActive('paragraph') 
               ? 'bg-[var(--color-accent)] text-white' 
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
           }`}
         >
-          Bold
+          Paragraph
         </button>
         <button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`px-2 py-1 rounded text-sm transition-colors ${
-            editor.isActive('italic') 
-              ? 'bg-[var(--color-accent)] text-white' 
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
-        >
-          Italic
-        </button>
-        <button
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('heading', { level: 2 }) 
@@ -131,6 +123,7 @@ export default function TipTapEditor({
           H2
         </button>
         <button
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('heading', { level: 3 }) 
@@ -140,27 +133,59 @@ export default function TipTapEditor({
         >
           H3
         </button>
+        <div className="w-px bg-gray-600 mx-1"></div>
         <button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          className={`px-2 py-1 rounded text-sm transition-colors ${
+            editor.isActive('bold') 
+              ? 'bg-[var(--color-accent)] text-white' 
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          Bold
+        </button>
+        <button
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          className={`px-2 py-1 rounded text-sm transition-colors ${
+            editor.isActive('italic') 
+              ? 'bg-[var(--color-accent)] text-white' 
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          Italic
+        </button>
+        <div className="w-px bg-gray-600 mx-1"></div>
+        <button
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => {
+            editor.chain().focus().toggleBulletList().run()
+          }}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('bulletList') 
               ? 'bg-[var(--color-accent)] text-white' 
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
           }`}
         >
-          Bullet List
+          • Bullet List
         </button>
         <button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => {
+            editor.chain().focus().toggleOrderedList().run()
+          }}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('orderedList') 
               ? 'bg-[var(--color-accent)] text-white' 
               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
           }`}
         >
-          Ordered List
+          1. Ordered List
         </button>
+        <div className="w-px bg-gray-600 mx-1"></div>
         <button
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={`px-2 py-1 rounded text-sm transition-colors ${
             editor.isActive('codeBlock') 
@@ -171,7 +196,7 @@ export default function TipTapEditor({
           Code Block
         </button>
         <label className="px-2 py-1 rounded text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 cursor-pointer">
-          Image
+          📷 Image
           <input
             type="file"
             accept="image/*"
@@ -190,4 +215,4 @@ export default function TipTapEditor({
       <EditorContent editor={editor} />
     </div>
   )
-} 
+}

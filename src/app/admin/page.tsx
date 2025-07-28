@@ -3,8 +3,9 @@
 import { api } from '~/trpc/react'
 import Link from 'next/link'
 import { Button } from '~/app/_components/ui'
+import DevelopmentOnly from '~/app/_components/DevelopmentOnly'
 
-export default function AdminDashboard() {
+function AdminDashboard() {
   const { data: posts, isLoading, refetch } = api.post.getAll.useQuery()
   const togglePublish = api.post.togglePublish.useMutation({
     onSuccess: () => {
@@ -102,5 +103,13 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AdminPage() {
+  return (
+    <DevelopmentOnly>
+      <AdminDashboard />
+    </DevelopmentOnly>
   )
 } 

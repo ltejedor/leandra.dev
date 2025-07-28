@@ -4,7 +4,7 @@ import { generateHTML } from '@tiptap/html/server';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 
-// TipTap extensions for HTML generation
+// TipTap extensions for HTML generation - match client configuration
 const extensions = [
   StarterKit,
   Image.configure({

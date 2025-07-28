@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { api } from '~/trpc/react'
 import { Button } from '~/app/_components/ui'
 import TipTapEditor from '~/app/_components/TipTapEditor'
+import DevelopmentOnly from '~/app/_components/DevelopmentOnly'
 import Link from 'next/link'
 
 function generateSlug(title: string): string {
@@ -14,7 +15,7 @@ function generateSlug(title: string): string {
     .replace(/^-+|-+$/g, '')
 }
 
-export default function AdminPostEditor() {
+function AdminPostEditor() {
   const params = useParams()
   const router = useRouter()
   const slug = params.slug as string
@@ -211,5 +212,13 @@ export default function AdminPostEditor() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AdminPostEditorPage() {
+  return (
+    <DevelopmentOnly>
+      <AdminPostEditor />
+    </DevelopmentOnly>
   )
 } 
