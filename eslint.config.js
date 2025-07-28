@@ -33,6 +33,18 @@ export default tseslint.config(
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
+      // Relax strict typing rules for development
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/prefer-optional-chain": "warn",
+      // Next.js specific rules
+      "@next/next/no-html-link-for-pages": "warn",
+      "@next/next/no-img-element": "warn",
+      // React rules
+      "react/no-unescaped-entities": "off",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
   {

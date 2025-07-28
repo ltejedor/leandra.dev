@@ -41,7 +41,7 @@ const FilterPills = forwardRef<HTMLDivElement, FilterPillsProps>(
               key={option.id}
               onClick={() => handlePillClick(option.id)}
               className={cn(
-                "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+                "inline-flex items-center gap-2 px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200 uppercase tracking-wide",
                 "border focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2 focus:ring-offset-[var(--color-canvas)]",
                 isSelected
                   ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)] shadow-lg shadow-[var(--color-accent)]/20"
@@ -52,7 +52,7 @@ const FilterPills = forwardRef<HTMLDivElement, FilterPillsProps>(
               {option.count !== undefined && (
                 <span
                   className={cn(
-                    "text-xs px-2 py-0.5 rounded-full",
+                    "text-xs px-2 py-0.5 rounded-sm",
                     isSelected
                       ? "bg-white/20 text-white"
                       : "bg-[var(--color-canvas-muted)] text-[var(--color-text-muted)]"
@@ -68,7 +68,7 @@ const FilterPills = forwardRef<HTMLDivElement, FilterPillsProps>(
         {selected.length > 0 && (
           <button
             onClick={() => onSelectionChange([])}
-            className="inline-flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-2 rounded-sm text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors uppercase tracking-wide border border-[var(--color-border)] hover:border-[var(--color-accent)]"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
