@@ -37,11 +37,11 @@ export async function uploadImage(file: File): Promise<string> {
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || `Upload failed with status ${response.status}`)
+      const errorData = await response.json() as { error?: string }
+      throw new Error(errorData.error ?? `Upload failed with status ${response.status}`)
     }
 
-    const result = await response.json()
+    const result = await response.json() as { url?: string }
     
     if (!result.url) {
       throw new Error('No URL returned from upload')
