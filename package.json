@@ -16,6 +16,14 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "migrate:blog": "node scripts/migrate-blog-simple.cjs",
+    "enhance:blog": "node scripts/enhance-blog-content.cjs",
+    "copy:blog-images": "node scripts/copy-blog-images.cjs",
+    "upload:blog-images": "node scripts/upload-blog-images-to-supabase.cjs",
+    "fix:blog-images-previews": "node scripts/fix-blog-images-and-previews.cjs",
+    "enhance:blog-content-images": "node scripts/enhance-blog-content-with-images.cjs",
+    "add:blog-tags": "node scripts/add-tags-to-posts.cjs",
+    "fix:empty-text-nodes": "node scripts/fix-empty-text-nodes.cjs",
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit"
@@ -33,14 +41,17 @@
     "@trpc/client": "^11.0.0",
     "@trpc/react-query": "^11.0.0",
     "@trpc/server": "^11.0.0",
+    "@types/jsdom": "^21.1.7",
     "clsx": "^2.1.1",
+    "jsdom": "^26.1.0",
     "next": "^15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.5.5",
-    "zod": "^3.24.2"
+    "zod": "^3.24.2",
+    "@tiptap/core": "^3.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

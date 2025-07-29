@@ -48,6 +48,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
 }
 
 body {
@@ -355,34 +356,81 @@ button:disabled {
   color: var(--color-text-primary);
   margin-top: 2rem;
   margin-bottom: 1rem;
+  scroll-margin-top: 2rem;
 }
 
 .prose p {
   margin-bottom: 1.5rem;
 }
 
+.prose img {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  margin: 2rem 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 107, 53, 0.1);
+  transition: all 0.3s ease;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose img:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 107, 53, 0.2);
+  transform: translateY(-2px);
+}
+
 .prose code {
   background: var(--color-canvas-muted);
-  padding: 0.125rem 0.25rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
   color: var(--color-accent);
+  border: 1px solid rgba(255, 107, 53, 0.1);
 }
 
 .prose pre {
-  background: var(--color-canvas-muted);
-  padding: 1rem;
-  border-radius: 0.5rem;
+  background: var(--color-canvas-subtle);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
+  border: 1px solid var(--color-border);
+  position: relative;
+}
+
+.prose pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  opacity: 0.3;
 }
 
 .prose blockquote {
   border-left: 4px solid var(--color-accent);
-  padding-left: 1rem;
-  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1.5rem;
+  margin: 2rem 0;
   font-style: italic;
   color: var(--color-text-secondary);
+  background: var(--color-canvas-subtle);
+  border-radius: 0 0.5rem 0.5rem 0;
+  position: relative;
+}
+
+.prose blockquote::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  opacity: 0.3;
 }
 
 .prose ul {
@@ -412,10 +460,47 @@ button:disabled {
 
 .prose a {
   color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .prose a:hover {
   color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Table of Contents styles */
+.toc-heading {
+  scroll-margin-top: 2rem; /* Ensure headings don't get hidden when scrolling to them */
+}
+
+/* TOC specific enhancements */
+.table-of-contents {
+  /* Ensure TOC is properly positioned */
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for TOC */
+.table-of-contents::-webkit-scrollbar {
+  width: 4px;
+}
+
+.table-of-contents::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+.table-of-contents::-webkit-scrollbar-thumb:hover {
+  opacity: 0.6;
 }
