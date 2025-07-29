@@ -160,7 +160,7 @@ export default function BlogPage() {
 
                             {/* Read More Link */}
                             <div className="flex items-center text-[var(--color-text-muted)] group-hover:text-white transition-colors duration-300 pt-2 mt-auto">
-                              <span className="font-medium text-sm">Read article</span>
+                              <span className="font-medium text-sm">Read</span>
                               <svg
                                 className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
                                 fill="none"
@@ -187,7 +187,7 @@ export default function BlogPage() {
                       disabled={isLoading}
                       className="px-10 py-4 text-base border border-[var(--color-border)] hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-canvas-subtle)] hover:text-[var(--color-accent)]"
                     >
-                      {isLoading ? 'Loading...' : 'Load More Posts'}
+                      {isLoading ? 'Loading...' : 'Load More'}
                     </Button>
                   </div>
                 )}
