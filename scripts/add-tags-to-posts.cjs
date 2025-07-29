@@ -27,6 +27,10 @@ const postTags = {
   '2021-year-in-review': ['Adventure']
 };
 
+/**
+ * @param {string} slug
+ * @param {string[]} tags
+ */
 async function addTagsToPost(slug, tags) {
   try {
     const post = await prisma.post.findUnique({
