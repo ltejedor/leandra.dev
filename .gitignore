@@ -46,3 +46,9 @@ yarn-error.log*
 .idea
 
 blogs_archive
+
+scripts/notes.md
+
+Post_rows.csv
+
+scripts/

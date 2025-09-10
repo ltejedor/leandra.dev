@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
+import LinkExtension from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import { uploadImage } from '~/lib/supabase'
 import { useCallback, useEffect } from 'react'
@@ -26,6 +27,15 @@ export default function TipTapEditor({
       Image.configure({
         HTMLAttributes: {
           class: 'rounded-lg max-w-full h-auto',
+        },
+      }),
+      LinkExtension.configure({
+        autolink: true,
+        linkOnPaste: true,
+        openOnClick: false,
+        HTMLAttributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer nofollow',
         },
       }),
       Placeholder.configure({

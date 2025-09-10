@@ -49,8 +49,8 @@ export default function BlogPage() {
                 <button
                   onClick={() => setSelectedTag(undefined)}
                   className={`block w-full text-left px-3 py-2.5 rounded-lg transition-all duration-300 relative overflow-hidden text-sm ${selectedTag === undefined
-                      ? 'bg-[var(--color-canvas-subtle)] text-white border border-[var(--color-accent)]/30 shadow-lg before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-[var(--color-accent)] before:content-[""]'
-                      : 'text-[var(--color-text-secondary)] hover:text-white hover:bg-[var(--color-canvas-subtle)] hover:shadow-md hover:border-[var(--color-accent)]/20 border border-transparent'
+                    ? 'bg-[var(--color-canvas-subtle)] text-white border border-[var(--color-accent)]/30 shadow-lg before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-[var(--color-accent)] before:content-[""]'
+                    : 'text-[var(--color-text-secondary)] hover:text-white hover:bg-[var(--color-canvas-subtle)] hover:shadow-md hover:border-[var(--color-accent)]/20 border border-transparent'
                     }`}
                 >
                   <span className="flex justify-between items-center">
@@ -66,8 +66,8 @@ export default function BlogPage() {
                     key={tag}
                     onClick={() => setSelectedTag(tag)}
                     className={`block w-full text-left px-3 py-2.5 rounded-lg transition-all duration-300 relative overflow-hidden text-sm ${selectedTag === tag
-                        ? 'bg-[var(--color-canvas-subtle)] text-white border border-[var(--color-accent)]/30 shadow-lg before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-[var(--color-accent)] before:content-[""]'
-                        : 'text-[var(--color-text-secondary)] hover:text-white hover:bg-[var(--color-canvas-subtle)] hover:shadow-md hover:border-[var(--color-accent)]/20 border border-transparent'
+                      ? 'bg-[var(--color-canvas-subtle)] text-white border border-[var(--color-accent)]/30 shadow-lg before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-[var(--color-accent)] before:content-[""]'
+                      : 'text-[var(--color-text-secondary)] hover:text-white hover:bg-[var(--color-canvas-subtle)] hover:shadow-md hover:border-[var(--color-accent)]/20 border border-transparent'
                       }`}
                   >
                     <span className="flex justify-between items-center">

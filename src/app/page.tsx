@@ -1,9 +1,12 @@
 import { api, HydrateClient } from "~/trpc/server";
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from "~/app/_components/ui";
+import { Button, Tag } from "~/app/_components/ui";
 
 export default async function Home() {
+  // Fetch the 4 most recent blog posts
+  const recentPosts = await api.post.getPublished({ limit: 4 });
+
   return (
     <HydrateClient>
       <main className="bg-[var(--color-canvas)]">
@@ -103,6 +106,112 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Recent Blog Posts Section */}
+        {recentPosts.posts.length > 0 && (
+          <section className="px-4 py-16 bg-[var(--color-canvas)]">
+            <div className="container mx-auto max-w-5xl">
+              {/* Section Header */}
+              <div className="flex items-center justify-between mb-12">
+                <div className="relative">
+                  <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">Recent Writing</h2>
+                  <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-[var(--color-accent)] opacity-60"></div>
+                </div>
+                <Link href="/blog">
+                  <Button variant="ghost" size="sm" className="border border-[var(--color-border)] hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-canvas-subtle)] hover:text-[var(--color-accent)]">
+                    All Posts
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Posts Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {recentPosts.posts.map((post) => (
+                  <article key={post.id} className="group">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      <div className="space-y-4 p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-canvas)] hover:bg-[var(--color-canvas-subtle)] hover:border-[var(--color-accent)]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-accent)]/5 h-full flex flex-col">
+                        {/* Preview Image */}
+                        {post.previewImage && (
+                          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg bg-[var(--color-canvas-subtle)] border border-[var(--color-border)]">
+                            <img
+                              src={post.previewImage}
+                              alt={post.title}
+                              className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
+                            />
+                            <div className="absolute inset-0 rounded-lg border-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          </div>
+                        )}
+
+                        {/* Content */}
+                        <div className="space-y-3 flex-1 flex flex-col">
+                          {/* Tags */}
+                          {post.tags && post.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {post.tags.slice(0, 2).map((tag) => (
+                                <Tag key={tag} variant="default" size="sm">
+                                  {tag}
+                                </Tag>
+                              ))}
+                              {post.tags.length > 2 && (
+                                <Tag variant="default" size="sm">
+                                  +{post.tags.length - 2}
+                                </Tag>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Date */}
+                          <time className="text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-widest">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                          </time>
+
+                          {/* Title */}
+                          <h3 className="text-lg font-bold text-white group-hover:text-[var(--color-text-secondary)] transition-colors duration-300 leading-tight">
+                            {post.title}
+                          </h3>
+
+                          {/* Excerpt */}
+                          <p className="text-[var(--color-text-secondary)] leading-relaxed text-sm flex-1">
+                            {post.excerpt || (() => {
+                              try {
+                                const content = post.content as any;
+                                const firstParagraph = content?.content?.find((node: any) =>
+                                  node.type === 'paragraph' && node.content?.[0]?.text
+                                );
+                                const text = firstParagraph?.content?.[0]?.text || 'Read more...';
+                                return text.length > 100 ? text.substring(0, 100) + '...' : text;
+                              } catch {
+                                return 'Read more...';
+                              }
+                            })()}
+                          </p>
+
+                          {/* Read More Link */}
+                          <div className="flex items-center text-[var(--color-text-muted)] group-hover:text-white transition-colors duration-300 pt-2 mt-auto">
+                            <span className="font-medium text-sm">Read</span>
+                            <svg
+                              className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
     </HydrateClient>
   );

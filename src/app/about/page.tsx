@@ -82,7 +82,7 @@ export default function About() {
           <div className="space-y-6">
             <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-                <h3 className="text-lg font-semibold text-white">MIT Graduate School</h3>
+                <h3 className="text-lg font-semibold text-white">MIT</h3>
                 <span className="text-sm text-[var(--color-accent)] font-bold">2021-2024</span>
               </div>
               <p className="text-[var(--color-text-secondary)]">

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { generateHTML } from '@tiptap/html/server'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
+import LinkExtension from '@tiptap/extension-link'
 import { Tag } from '~/app/_components/ui'
 import { extractHeadings } from '~/lib/toc-utils'
 import { TableOfContents } from '~/app/_components/ui/TableOfContents'
@@ -15,6 +16,15 @@ const extensions = [
     HTMLAttributes: {
       class: 'rounded-xl max-w-full h-auto my-8 border border-[var(--color-border)] shadow-xl hover:shadow-2xl transition-shadow duration-300 relative',
       style: 'box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 107, 53, 0.1);'
+    },
+  }),
+  LinkExtension.configure({
+    autolink: true,
+    linkOnPaste: true,
+    openOnClick: false,
+    HTMLAttributes: {
+      target: '_blank',
+      rel: 'noopener noreferrer nofollow',
     },
   }),
 ]
@@ -62,6 +72,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       return updatedOpenTag + content + closeTag;
     });
   });
+
+  // Ensure proper spacing around inline links when adjacent to words or parentheses
+  htmlWithIds = htmlWithIds
+    .replace(/([A-Za-z0-9])<a /g, '$1 <a ')
+    .replace(/<\/a>([A-Za-z0-9(])/g, '</a> $1');
+
+  // Rewrite relative image srcs to Supabase public URLs (matches live site behavior)
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (supabaseUrl) {
+    const toSupabaseUrl = (src: string) => {
+      // Skip absolute URLs
+      if (/^https?:\/\//i.test(src)) return src;
+      // Extract filename from local paths like ./Some_files/file.png or /images/blog/slug/file.png
+      const parts = src.split('/');
+      const filename = parts[parts.length - 1] || src;
+      const sanitized = filename
+        .replace(/[^a-zA-Z0-9.-]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+      return `${supabaseUrl}/storage/v1/object/public/blog-images/public/${slug}/${sanitized}`;
+    };
+
+    htmlWithIds = htmlWithIds.replace(/(<img[^>]*?src=")(.*?)(")[^>]*?>/g, (match, p1, src, p3) => {
+      if (src.startsWith('./') || src.startsWith('/images/blog/')) {
+        return match.replace(src, toSupabaseUrl(src));
+      }
+      return match;
+    });
+  }
 
   return (
     <div className="min-h-screen bg-[var(--color-canvas)]">

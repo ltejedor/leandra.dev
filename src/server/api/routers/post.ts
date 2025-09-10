@@ -3,6 +3,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { generateHTML } from '@tiptap/html/server';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
+import LinkExtension from '@tiptap/extension-link';
 import { extractHeadings } from '~/lib/toc-utils';
 
 // TipTap extensions for HTML generation - match client configuration
@@ -11,6 +12,15 @@ const extensions = [
   Image.configure({
     HTMLAttributes: {
       class: 'rounded-lg max-w-full h-auto',
+    },
+  }),
+  LinkExtension.configure({
+    autolink: true,
+    linkOnPaste: true,
+    openOnClick: false,
+    HTMLAttributes: {
+      target: '_blank',
+      rel: 'noopener noreferrer nofollow',
     },
   }),
 ];
@@ -103,6 +113,33 @@ export const postRouter = createTRPCRouter({
           return updatedOpenTag + content + closeTag;
         });
       });
+
+      // Ensure proper spacing around inline links when adjacent to words or parentheses
+      html = html
+        .replace(/([A-Za-z0-9])<a /g, '$1 <a ')
+        .replace(/<\/a>([A-Za-z0-9(])/g, '</a> $1');
+
+      // Rewrite relative image srcs to Supabase public URLs (matches live site behavior)
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      if (supabaseUrl) {
+        const toSupabaseUrl = (src: string) => {
+          if (/^https?:\/\//i.test(src)) return src;
+          const parts = src.split('/');
+          const filename = parts[parts.length - 1] || src;
+          const sanitized = filename
+            .replace(/[^a-zA-Z0-9.-]/g, '_')
+            .replace(/_+/g, '_')
+            .replace(/^_|_$/g, '');
+          return `${supabaseUrl}/storage/v1/object/public/blog-images/public/${input.slug}/${sanitized}`;
+        };
+
+        html = html.replace(/(<img[^>]*?src=")(.*?)(")[^>]*?>/g, (match, p1, src, p3) => {
+          if (src.startsWith('./') || src.startsWith('/images/blog/')) {
+            return match.replace(src, toSupabaseUrl(src));
+          }
+          return match;
+        });
+      }
 
       return {
         ...post,
