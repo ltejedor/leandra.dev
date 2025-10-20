@@ -6,6 +6,8 @@ import { Inter } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Footer } from "~/app/_components/Footer";
 import { Header } from "~/app/_components/Header";
+import { FathomAnalytics } from './fathom';
+
 
 export const metadata: Metadata = {
   title: "Leandra Tejedor",
@@ -24,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable}`}>
       <body className={`${inter.variable} min-h-screen bg-[var(--color-canvas)] text-[var(--color-text-primary)] font-sans`}>
+        <FathomAnalytics />
         <Header />
         <TRPCReactProvider>{children}</TRPCReactProvider>
         <Footer />
