@@ -5,6 +5,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import LinkExtension from '@tiptap/extension-link';
 import { extractHeadings } from '~/lib/toc-utils';
+import { RawHTML } from '~/lib/tiptap-extensions';
 
 // TipTap extensions for HTML generation - match client configuration
 const extensions = [
@@ -23,6 +24,7 @@ const extensions = [
       rel: 'noopener noreferrer nofollow',
     },
   }),
+  RawHTML,
 ];
 
 export const postRouter = createTRPCRouter({

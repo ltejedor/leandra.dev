@@ -8,6 +8,7 @@ import LinkExtension from '@tiptap/extension-link'
 import { Tag } from '~/app/_components/ui'
 import { extractHeadings } from '~/lib/toc-utils'
 import { TableOfContents } from '~/app/_components/ui/TableOfContents'
+import { RawHTML } from '~/lib/tiptap-extensions'
 
 // TipTap extensions for HTML generation - match client configuration
 const extensions = [
@@ -27,6 +28,7 @@ const extensions = [
       rel: 'noopener noreferrer nofollow',
     },
   }),
+  RawHTML,
 ]
 
 interface BlogPostPageProps {
@@ -51,8 +53,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   // Generate HTML from TipTap JSON with heading IDs
   const html = generateHTML(post.content as any, extensions)
 
+  // Post-process HTML to render raw HTML blocks properly
+  let processedHtml = html.replace(
+    /<div[^>]*?data-html="([^"]*?)"[^>]*?><\/div>/g,
+    (match, htmlContent) => {
+      // Decode HTML entities (decode &amp; first to avoid double-decoding)
+      const decodedHtml = htmlContent
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#039;/g, "'");
+      
+      return `<div data-raw-html="" class="raw-html-block">${decodedHtml}</div>`;
+    }
+  );
+
   // Add IDs to headings in the HTML using a more robust approach
-  let htmlWithIds = html;
+  let htmlWithIds = processedHtml;
   tocHeadings.forEach(({ id, text, level }) => {
     // Create a more specific pattern that matches the exact heading level and text
     const escapedText = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

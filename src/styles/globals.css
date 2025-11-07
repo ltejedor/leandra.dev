@@ -504,3 +504,60 @@ button:disabled {
 .table-of-contents::-webkit-scrollbar-thumb:hover {
   opacity: 0.6;
 }
+
+/* Raw HTML block styles */
+.raw-html-block {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--color-canvas-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/* Style tables within HTML blocks */
+.raw-html-block table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.raw-html-block th,
+.raw-html-block td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.raw-html-block th {
+  background: var(--color-canvas-muted);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.raw-html-block tr:hover {
+  background: var(--color-interactive-hover);
+}
+
+/* Ensure iframe, video, and other embeds are responsive */
+.raw-html-block iframe,
+.raw-html-block video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Generic styling for content within HTML blocks */
+.raw-html-block p {
+  margin-bottom: 1rem;
+}
+
+.raw-html-block h1,
+.raw-html-block h2,
+.raw-html-block h3,
+.raw-html-block h4,
+.raw-html-block h5,
+.raw-html-block h6 {
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}

@@ -7,6 +7,7 @@ import LinkExtension from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import { uploadImage } from '~/lib/supabase'
 import { useCallback, useEffect, useRef } from 'react'
+import { RawHTML } from '~/lib/tiptap-extensions'
 
 interface TipTapEditorProps {
   initialContent?: any
@@ -44,6 +45,7 @@ export default function TipTapEditor({
       Placeholder.configure({
         placeholder,
       }),
+      RawHTML,
     ],
     content: initialContent,
     immediatelyRender: false, // Fix SSR hydration issues
@@ -246,6 +248,22 @@ export default function TipTapEditor({
           }`}
         >
           Code Block
+        </button>
+        <div className="w-px bg-gray-600 mx-1"></div>
+        <button
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => {
+            const html = window.prompt('Enter HTML:', '')
+            if (html !== null) {
+              editor.chain().focus().insertContent({
+                type: 'rawHTML',
+                attrs: { html }
+              }).run()
+            }
+          }}
+          className="px-2 py-1 rounded text-sm bg-gray-700 text-gray-300 hover:bg-gray-600"
+        >
+          &lt;/&gt; HTML
         </button>
         <label className="px-2 py-1 rounded text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 cursor-pointer">
           📷 Image

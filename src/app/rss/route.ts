@@ -1,14 +1,16 @@
-import { db } from '~/server/db'
+import { db } from '../../server/db'
 import { generateHTML } from '@tiptap/html/server'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import LinkExtension from '@tiptap/extension-link'
+import { RawHTML } from '../../lib/tiptap-extensions'
 
 // TipTap extensions for HTML generation
 const extensions = [
   StarterKit,
   Image,
   LinkExtension,
+  RawHTML,
 ]
 
 export async function GET(request: Request) {
@@ -45,7 +47,23 @@ export async function GET(request: Request) {
     ${posts
       .map((post) => {
         const postUrl = `${baseUrl}/blog/${post.slug}`
-        const contentHtml = generateHTML(post.content as any, extensions)
+        let contentHtml = generateHTML(post.content as any, extensions)
+        
+        // Post-process HTML to render raw HTML blocks properly
+        contentHtml = contentHtml.replace(
+          /<div[^>]*?data-html="([^"]*?)"[^>]*?><\/div>/g,
+          (match, htmlContent) => {
+            // Decode HTML entities (decode &amp; first to avoid double-decoding)
+            const decodedHtml = htmlContent
+              .replace(/&amp;/g, '&')
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>')
+              .replace(/&quot;/g, '"')
+              .replace(/&#039;/g, "'");
+            
+            return `<div data-raw-html="" class="raw-html-block">${decodedHtml}</div>`;
+          }
+        );
         
         return `
     <item>
