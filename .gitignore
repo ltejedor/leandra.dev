@@ -48,7 +48,7 @@ yarn-error.log*
 blogs_archive
 
 scripts/notes.md
-script/*
+scripts/*
 
 Post_rows.csv
 

@@ -181,6 +181,7 @@ export const postRouter = createTRPCRouter({
       title: z.string().min(1),
       content: z.any(), // TipTap JSON content
       published: z.boolean().optional().default(false),
+      previewImage: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.post.upsert({
@@ -189,12 +190,14 @@ export const postRouter = createTRPCRouter({
           title: input.title,
           content: input.content,
           published: input.published,
+          previewImage: input.previewImage,
         },
         create: {
           slug: input.slug,
           title: input.title,
           content: input.content,
           published: input.published,
+          previewImage: input.previewImage,
         },
       });
     }),

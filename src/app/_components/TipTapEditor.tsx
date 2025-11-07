@@ -6,7 +6,7 @@ import Image from '@tiptap/extension-image'
 import LinkExtension from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import { uploadImage } from '~/lib/supabase'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 interface TipTapEditorProps {
   initialContent?: any
@@ -21,6 +21,9 @@ export default function TipTapEditor({
   placeholder = "Start writing your post...",
   className = ""
 }: TipTapEditorProps) {
+  const isInitialized = useRef(false)
+  const lastInitialContent = useRef<any>(null)
+  
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -96,9 +99,23 @@ export default function TipTapEditor({
     }
   }, [editor])
 
+  // Only set content when editor is first created or when loading a different post
   useEffect(() => {
-    if (editor && initialContent) {
-      editor.commands.setContent(initialContent)
+    if (!editor || !initialContent) return
+    
+    // Check if this is a different post (content has changed externally, not from typing)
+    const contentChanged = JSON.stringify(lastInitialContent.current) !== JSON.stringify(initialContent)
+    
+    if (!isInitialized.current || contentChanged) {
+      // Only update if the editor's current content is different (avoids cursor jump while typing)
+      const currentContent = editor.getJSON()
+      const editorContentMatches = JSON.stringify(currentContent) === JSON.stringify(initialContent)
+      
+      if (!editorContentMatches) {
+        editor.commands.setContent(initialContent)
+        lastInitialContent.current = initialContent
+      }
+      isInitialized.current = true
     }
   }, [editor, initialContent])
 
@@ -166,6 +183,31 @@ export default function TipTapEditor({
         >
           Italic
         </button>
+        <button
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => {
+            const url = window.prompt('Enter URL:', editor.getAttributes('link').href || 'https://')
+            if (url) {
+              editor.chain().focus().setLink({ href: url }).run()
+            }
+          }}
+          className={`px-2 py-1 rounded text-sm transition-colors ${
+            editor.isActive('link') 
+              ? 'bg-[var(--color-accent)] text-white' 
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          🔗 Link
+        </button>
+        {editor.isActive('link') && (
+          <button
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => editor.chain().focus().unsetLink().run()}
+            className="px-2 py-1 rounded text-sm bg-red-600 text-white hover:bg-red-700"
+          >
+            Remove Link
+          </button>
+        )}
         <div className="w-px bg-gray-600 mx-1"></div>
         <button
           onMouseDown={(e) => e.preventDefault()}

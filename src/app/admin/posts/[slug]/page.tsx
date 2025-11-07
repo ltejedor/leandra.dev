@@ -25,6 +25,7 @@ function AdminPostEditor() {
   const [currentSlug, setCurrentSlug] = useState('')
   const [content, setContent] = useState<any>(null)
   const [published, setPublished] = useState(false)
+  const [previewImage, setPreviewImage] = useState('')
   const [autoSaveStatus, setAutoSaveStatus] = useState<'saved' | 'saving' | 'unsaved'>('saved')
 
   // Fetch existing post if editing
@@ -54,6 +55,7 @@ function AdminPostEditor() {
       setCurrentSlug(post.slug)
       setContent(post.content)
       setPublished(post.published)
+      setPreviewImage(post.previewImage ?? '')
     }
   }, [post])
 
@@ -75,13 +77,14 @@ function AdminPostEditor() {
           slug: currentSlug,
           title,
           content,
-          published: false // Auto-save as draft
+          published: false, // Auto-save as draft
+          previewImage: previewImage || undefined
         })
       }
     }, 2000) // Auto-save after 2 seconds of inactivity
 
     return () => clearTimeout(timeoutId)
-  }, [title, content, currentSlug, autoSaveStatus])
+  }, [title, content, currentSlug, previewImage, autoSaveStatus])
 
   const handleSave = (shouldPublish?: boolean) => {
     if (!title || !content) return
@@ -90,7 +93,8 @@ function AdminPostEditor() {
       slug: currentSlug,
       title,
       content,
-      published: shouldPublish ?? published
+      published: shouldPublish ?? published,
+      previewImage: previewImage || undefined
     })
   }
 
@@ -101,6 +105,11 @@ function AdminPostEditor() {
 
   const handleTitleChange = (newTitle: string) => {
     setTitle(newTitle)
+    setAutoSaveStatus('unsaved')
+  }
+
+  const handlePreviewImageChange = (newPreviewImage: string) => {
+    setPreviewImage(newPreviewImage)
     setAutoSaveStatus('unsaved')
   }
 
@@ -164,6 +173,32 @@ function AdminPostEditor() {
               className="w-full px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition-all"
               placeholder="post-slug"
             />
+          </div>
+
+          {/* Cover Image */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Cover Image URL
+            </label>
+            <input
+              type="url"
+              value={previewImage}
+              onChange={(e) => handlePreviewImageChange(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-900 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] transition-all"
+              placeholder="https://..."
+            />
+            {previewImage && (
+              <div className="mt-2">
+                <img 
+                  src={previewImage} 
+                  alt="Cover preview" 
+                  className="w-full max-w-md h-auto rounded-lg border border-gray-600"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           {/* Content Editor */}
