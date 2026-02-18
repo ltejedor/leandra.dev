@@ -50,7 +50,6 @@ export default function About() {
           <div className="space-y-4 text-lg leading-relaxed text-center mb-8">
             <p>
               Winner of the <a href="https://www.jamesdysonaward.org/en-US/2022/project/apt-accessible-pregnancy-test/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">James Dyson Award</a>, <a href="https://www.prototypesforhumanity.com/project/apt/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Prototypes for Humanity</a>.
-              Featured in <a href="https://www.youtube.com/shorts/ZiYf4EkyPSI" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Google's She Builds AI</a> &
             </p>
           </div>
 
@@ -179,29 +178,121 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card variant="interactive" className="card">
-              <h3 className="text-xl font-semibold text-white mb-2">Cyber Arts Camp</h3>
+            <Card variant="interactive" className="card h-full">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                <h3 className="text-xl font-semibold text-white"><a href="https://www.cyberarts.io/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors">Cyber Arts Camp</a></h3>
+                <span className="text-sm text-[var(--color-accent)] font-bold">2021</span>
+              </div>
               <div className="mb-3">
                 <span className="text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] rounded-sm px-2 py-1">
                   Cofounder
                 </span>
               </div>
-              <p className="text-[var(--color-text-secondary)]">
+              <p className="text-[var(--color-text-secondary)] mb-3">
+                Co-founded between the Vidcode acquisition and MIT. Taught 100 students in bioengineering and cybersecurity that first summer. Still going strong.
+              </p>
+              <p className="text-[var(--color-text-secondary)] text-sm italic">
                 "One of my favorite new startups" - Megan Smith, former CTO of the United States
               </p>
             </Card>
 
-            <Card variant="interactive" className="card">
-              <h3 className="text-xl font-semibold text-white mb-2">Sundai Club</h3>
+            <Card variant="interactive" className="card h-full">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                <h3 className="text-xl font-semibold text-white"><a href="https://www.sundai.club/" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent)] transition-colors">Sundai Club</a></h3>
+                <span className="text-sm text-[var(--color-accent)] font-bold">2024</span>
+              </div>
               <div className="mb-3">
                 <span className="text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] rounded-sm px-2 py-1">
                   Cofounder
                 </span>
               </div>
-              <p className="text-[var(--color-text-secondary)]">
-                The largest AI Hacker Club in Cambridge, MA - <a href="https://www.wired.com/story/sundai-club-generative-ai-hackathon-group/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">featured in WIRED</a>
+              <p className="text-[var(--color-text-secondary)] mb-3">
+                The largest AI hacker club in Boston. Co-founded in my last semester at MIT, now an active non-profit with hundreds of hackers taking part. <a href="https://www.wired.com/story/sundai-club-generative-ai-hackathon-group/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Featured in WIRED</a>.
               </p>
             </Card>
+          </div>
+        </section>
+
+        {/* Papers & Research */}
+        <section className="mb-20">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-8">Papers</h2>
+          <div className="space-y-6">
+            <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Stylizing 3D Models With Generative AI for Fabrication</h3>
+              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">MIT Master's Thesis</p>
+              <p className="text-[var(--color-text-secondary)]">
+                <a href="https://dspace.mit.edu/handle/1721.1/163692" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">View thesis</a>
+              </p>
+            </div>
+
+            <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">MechStyle: Augmenting Generative AI with Mechanical Simulation to Create Stylized and Structurally Viable 3D Models</h3>
+              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">SCF '25</p>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                Faraz Faruqi, Amira Abdel-Rahman, <span className="text-white">Leandra Tejedor</span>, Martin Nisser, Jiaji Li, Vrushank Phadnis, Varun Jampani, Neil Gershenfeld, Megan Hofmann, Stefanie Mueller
+              </p>
+              <p className="text-[var(--color-text-secondary)]">
+                <a href="https://www.youtube.com/watch?v=3BEZYZ86DNQ" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Watch video</a>
+              </p>
+            </div>
+
+            <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Style2Fab: Functionality-Aware Segmentation for Fabricating Personalized 3D Models with Generative AI</h3>
+              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">UIST '23</p>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                Faraz Faruqi, Ahmed Katary, Tarik Hasic, Amira Abdel-Rahman, Nayeemur Rahman, <span className="text-white">Leandra Tejedor</span>, Mackenzie Leake, Megan Hofmann, Stefanie Mueller
+              </p>
+              <p className="text-[var(--color-text-secondary)]">
+                <a href="https://doi.org/10.1145/3586183.3606723" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">DOI</a>
+                <span className="mx-2">·</span>
+                <a href="https://www.youtube.com/watch?v=wGp1vMNsM3Q" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Watch video</a>
+              </p>
+            </div>
+
+            <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">SAP-sLDA: An Interpretable Interface for Exploring Unstructured Text</h3>
+              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">Acknowledged contributor</p>
+              <p className="text-sm text-[var(--color-text-secondary)] mb-3">
+                Contributed initial work on the project including dataset collection and data preprocessing techniques.
+              </p>
+              <p className="text-[var(--color-text-secondary)]">
+                <a href="https://arxiv.org/abs/2308.01420" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">arXiv</a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Podcasts */}
+        <section className="mb-20">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-8">Featured Podcasts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="https://www.buzzsprout.com/1646461/episodes/7937611" target="_blank" rel="noopener noreferrer" className="block">
+              <Card variant="interactive" className="card h-full">
+                <div className="mb-3">
+                  <span className="text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] rounded-sm px-2 py-1">
+                    Age of Awareness Podcast
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Ep. 1 - Art, Startups, and Teaching Kids to Code</h3>
+                <p className="text-[var(--color-text-secondary)]">
+                  A conversation with Vidcode Cofounder Leandra Tejedor
+                </p>
+              </Card>
+            </a>
+
+            <a href="https://soundcloud.com/chris-davis-276158228/vidcode-designing-for-girls-coding-for-all" target="_blank" rel="noopener noreferrer" className="block">
+              <Card variant="interactive" className="card h-full">
+                <div className="mb-3">
+                  <span className="text-xs font-semibold bg-[var(--color-accent-subtle)] text-[var(--color-accent)] rounded-sm px-2 py-1">
+                    Chris Davis
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">Vidcode: Designing for Girls, Coding for All</h3>
+                <p className="text-[var(--color-text-secondary)]">
+                  On building inclusive coding education
+                </p>
+              </Card>
+            </a>
           </div>
         </section>
 
@@ -236,8 +327,6 @@ export default function About() {
             </div>
           </div>
         </section>
-
-
 
       </div>
     </div>
