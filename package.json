@@ -54,7 +54,7 @@
     "clsx": "^2.1.1",
     "fathom-client": "^3.7.2",
     "jsdom": "^26.1.0",
-    "next": "^15.2.3",
+    "next": "15.2.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "^0.0.1",
