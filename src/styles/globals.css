@@ -327,13 +327,14 @@ button:disabled {
   }
 }
 
-/* Container base styles - max-width controlled by Tailwind utility classes */
+/* Container improvements - max 800px as specified */
 .container {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: 800px;
 }
 
 /* Highlight class for accent-colored text */

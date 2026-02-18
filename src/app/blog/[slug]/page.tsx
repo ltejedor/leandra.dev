@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <div className="min-h-screen bg-[var(--color-canvas)]">
       {/* Hero Section */}
       <div className="py-24 border-b border-[var(--color-border)]">
-        <div className="container mx-auto px-6 max-w-7xl">
+        <div className="w-full mx-auto px-6 max-w-6xl">
           <Link
             href="/blog"
             className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] mb-8 inline-flex items-center group transition-colors duration-200"
@@ -181,7 +181,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Content */}
       <div className="py-16">
-        <div className="container mx-auto px-6 max-w-7xl">
+        <div className="w-full mx-auto px-6 max-w-6xl">
           <div className="flex gap-8">
             {/* Main content */}
             <article className="flex-1 max-w-4xl prose prose-invert prose-xl 
@@ -221,7 +221,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Footer Navigation */}
       <div className="border-t border-[var(--color-border)] py-12">
-        <div className="container mx-auto px-6 max-w-5xl">
+        <div className="w-full mx-auto px-6 max-w-6xl">
           <Link
             href="/blog"
             className="inline-flex items-center text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200 group"
