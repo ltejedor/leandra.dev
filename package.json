@@ -32,6 +32,7 @@
     "enhance:blog-content-images": "node scripts/enhance-blog-content-with-images.cjs",
     "add:blog-tags": "node scripts/add-tags-to-posts.cjs",
     "fix:empty-text-nodes": "node scripts/fix-empty-text-nodes.cjs",
+    "seed:year-in-review-2025": "node scripts/seed-year-in-review-2025.cjs",
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit"
