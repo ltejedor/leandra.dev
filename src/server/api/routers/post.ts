@@ -116,10 +116,11 @@ export const postRouter = createTRPCRouter({
         });
       });
 
-      // Ensure proper spacing around inline links when adjacent to words or parentheses
+      // Ensure proper spacing around inline elements (links, bold, italic) when adjacent to text
       html = html
-        .replace(/([A-Za-z0-9])<a /g, '$1 <a ')
-        .replace(/<\/a>([A-Za-z0-9(])/g, '</a> $1');
+        .replace(/([^\s<>])(<(?:a |strong>|em>))/g, '$1 $2')
+        .replace(/(<\/(?:a|strong|em)>)([^\s<>.,;:!?)'"])/g, '$1 $2')
+        .replace(/(<\/(?:a|strong|em)>)(<(?:a |strong>|em>))/g, '$1 $2');
 
       // Rewrite relative image srcs to Supabase public URLs (matches live site behavior)
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;

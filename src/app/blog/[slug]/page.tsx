@@ -91,10 +91,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     });
   });
 
-  // Ensure proper spacing around inline links when adjacent to words or parentheses
+  // Ensure proper spacing around inline elements (links, bold, italic) when adjacent to text
   htmlWithIds = htmlWithIds
-    .replace(/([A-Za-z0-9])<a /g, '$1 <a ')
-    .replace(/<\/a>([A-Za-z0-9(])/g, '</a> $1');
+    .replace(/([^\s<>])(<(?:a |strong>|em>))/g, '$1 $2')
+    .replace(/(<\/(?:a|strong|em)>)([^\s<>.,;:!?)'"])/g, '$1 $2')
+    .replace(/(<\/(?:a|strong|em)>)(<(?:a |strong>|em>))/g, '$1 $2');
 
   // Rewrite relative image srcs to Supabase public URLs (matches live site behavior)
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -185,7 +186,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="flex gap-8">
             {/* Main content */}
             <article className="flex-1 max-w-4xl prose prose-invert prose-xl 
-              prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
+              prose-headings:text-white prose-headings:font-normal prose-headings:tracking-tight
               prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-12
               prose-h2:text-3xl prose-h2:mb-6 prose-h2:mt-10
               prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8

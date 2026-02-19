@@ -353,6 +353,7 @@ button:disabled {
 .prose h3,
 .prose h4 {
   color: var(--color-text-primary);
+  font-weight: normal;
   margin-top: 2rem;
   margin-bottom: 1rem;
   scroll-margin-top: 2rem;
@@ -381,11 +382,19 @@ button:disabled {
 }
 
 .prose .raw-html-block iframe {
+  max-width: 100%;
+  min-height: 400px;
+  border-radius: 0.75rem;
+}
+
+.prose .raw-html-block video {
   width: 100%;
   max-width: 560px;
-  aspect-ratio: 16 / 9;
-  height: auto;
   border-radius: 0.75rem;
+}
+
+.prose .raw-html-block blockquote {
+  margin: 0 auto;
 }
 
 .prose img:hover {

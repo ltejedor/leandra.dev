@@ -16,6 +16,15 @@ const config = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/post/:slug*',
+        destination: '/blog/:slug*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default config;
