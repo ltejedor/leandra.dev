@@ -232,7 +232,7 @@ export default function About() {
                 Faraz Faruqi, Amira Abdel-Rahman, <span className="text-white">Leandra Tejedor</span>, Martin Nisser, Jiaji Li, Vrushank Phadnis, Varun Jampani, Neil Gershenfeld, Megan Hofmann, Stefanie Mueller
               </p>
               <p className="text-[var(--color-text-secondary)]">
-                <a href="https://www.youtube.com/watch?v=3BEZYZ86DNQ" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Watch video</a>
+                <a href="https://www.youtube.com/watch?v=3BEZYZ86DNQ" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Video</a>
               </p>
             </div>
 
@@ -245,18 +245,18 @@ export default function About() {
               <p className="text-[var(--color-text-secondary)]">
                 <a href="https://doi.org/10.1145/3586183.3606723" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">DOI</a>
                 <span className="mx-2">·</span>
-                <a href="https://www.youtube.com/watch?v=wGp1vMNsM3Q" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Watch video</a>
+                <a href="https://www.youtube.com/watch?v=wGp1vMNsM3Q" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Video</a>
               </p>
             </div>
 
             <div className="bg-[var(--color-canvas-subtle)] border border-[var(--color-canvas-muted)] rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-white mb-2">SAP-sLDA: An Interpretable Interface for Exploring Unstructured Text</h3>
-              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">Acknowledged contributor</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Ask Larry: AI-Powered Access to Decades of Dharma Teachings</h3>
+              <p className="text-sm text-[var(--color-accent)] font-bold mb-2">Core contributor — Harvard DtAK Lab, 2022</p>
               <p className="text-sm text-[var(--color-text-secondary)] mb-3">
-                Contributed initial work on the project including dataset collection and data preprocessing techniques.
+                Made decades of unscripted Q&amp;A inside long-form dharma talks searchable. Built with the Harvard Data to Actionable Knowledge Lab and Cambridge Insight Meditation Center; this work informed Larry Rosenberg's <em>The World Exists to Set Us Free</em> (Shambhala, 2025), and contributed collection and data preprocessing techniques to <a href="https://arxiv.org/abs/2308.01420" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline"><em>SAP-sLDA: An Interpretable Interface for Exploring Unstructured Text</em></a> (2023).
               </p>
               <p className="text-[var(--color-text-secondary)]">
-                <a href="https://arxiv.org/abs/2308.01420" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">arXiv</a>
+                <a href="https://cambridgeinsight.org/resources/ask-larry/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">Browse Ask Larry</a>
               </p>
             </div>
           </div>

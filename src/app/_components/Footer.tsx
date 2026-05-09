@@ -35,10 +35,10 @@ export function Footer() {
                 className="opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-200 group"
                 aria-label="Hugging Face"
               >
-                <img 
-                  src="/icons/hf-logo-pirate.svg" 
-                  alt="Hugging Face" 
-                  className="w-6 h-6 group-hover:brightness-0 group-hover:saturate-100 group-hover:filter group-hover:[filter:brightness(0)_saturate(100%)_invert(47%)_sepia(96%)_saturate(4456%)_hue-rotate(352deg)_brightness(106%)_contrast(94%)] transition-all duration-200" 
+                <img
+                  src="/icons/hf-logo-pirate.svg"
+                  alt="Hugging Face"
+                  className="w-6 h-6 rounded-sm transition-all duration-200 group-hover:outline group-hover:outline-2 group-hover:outline-[var(--color-accent)] group-hover:outline-offset-2"
                 />
               </a>
               <a 
@@ -59,7 +59,7 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-end text-center md:text-right">
             <div className="flex flex-col space-y-1">
               <p className="text-[var(--color-text-secondary)] text-sm">
-                © 2025 Leandra Tejedor
+                © 2026 Leandra Tejedor
               </p>
               <a 
                 href="https://github.com/ltejedor/leandra.dev" 
