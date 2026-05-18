@@ -210,6 +210,7 @@ function AdminPostEditor() {
               initialContent={content}
               onChange={handleContentChange}
               placeholder="Start writing your post..."
+              slug={isNew ? currentSlug : slug}
             />
           </div>
 

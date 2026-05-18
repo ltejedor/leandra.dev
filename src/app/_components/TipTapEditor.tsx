@@ -8,27 +8,71 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { uploadImage } from '~/lib/supabase'
 import { useCallback, useEffect, useRef } from 'react'
 import { RawHTML } from '~/lib/tiptap-extensions'
+import {
+  isRewritableImageSrc,
+  toLocalImageSrc,
+  toSupabaseImageSrc,
+} from '~/lib/blog-image-url'
 
 interface TipTapEditorProps {
   initialContent?: any
   onChange?: (content: any) => void
   placeholder?: string
   className?: string
+  slug?: string
 }
 
 export default function TipTapEditor({
   initialContent,
   onChange,
   placeholder = "Start writing your post...",
-  className = ""
+  className = "",
+  slug
 }: TipTapEditorProps) {
   const isInitialized = useRef(false)
   const lastInitialContent = useRef<any>(null)
-  
+  const slugRef = useRef(slug)
+  slugRef.current = slug
+
+  const BlogImage = Image.extend({
+    addNodeView() {
+      return ({ HTMLAttributes }) => {
+        const dom = document.createElement('img')
+
+        Object.entries(HTMLAttributes).forEach(([key, value]) => {
+          if (key === 'src') return
+          if (value != null) dom.setAttribute(key, String(value))
+        })
+
+        const originalSrc = (HTMLAttributes.src as string | null) ?? null
+
+        if (originalSrc && isRewritableImageSrc(originalSrc)) {
+          const localSrc = toLocalImageSrc(originalSrc)
+          const supabaseSrc = slugRef.current
+            ? toSupabaseImageSrc(originalSrc, slugRef.current)
+            : null
+
+          let fellBack = false
+          dom.addEventListener('error', () => {
+            if (!fellBack && supabaseSrc && dom.src !== supabaseSrc) {
+              fellBack = true
+              dom.src = supabaseSrc
+            }
+          })
+          dom.src = localSrc
+        } else if (originalSrc) {
+          dom.src = originalSrc
+        }
+
+        return { dom }
+      }
+    },
+  })
+
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Image.configure({
+      BlogImage.configure({
         HTMLAttributes: {
           class: 'rounded-lg max-w-full h-auto',
         },
