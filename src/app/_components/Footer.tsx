@@ -67,7 +67,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                View Source Code
+                Source Code
               </a>
             </div>
           </div>
