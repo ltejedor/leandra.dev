@@ -307,7 +307,7 @@ export default function About() {
                 </p>
 
                 <p>
-                  Recently exhibited at <a href="https://thecvf-art.com/project/the-meaning-of-mirror/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">CVPR 2025 Art Gallery</a> with "The Meaning of Mirror" -
+                  Recently exhibited at <a href="https://thecvf-art.com/project.php?year=2025&artist=the-meaning-of-mirror" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">CVPR 2025 Art Gallery</a> with "The Meaning of Mirror" -
                   a self-portrait exploring generative AI through meaningful visual grammar.
                 </p>
               </div>
