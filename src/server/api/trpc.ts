@@ -6,7 +6,7 @@
  * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
  * need to use are documented accordingly near the end.
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -104,3 +104,16 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
+
+/**
+ * Development-only procedure
+ *
+ * For admin operations (editing, deleting, viewing drafts). The admin UI only runs locally, so these
+ * are rejected outright in production. The middleware in src/middleware.ts doesn't cover /api/trpc.
+ */
+export const devOnlyProcedure = publicProcedure.use(({ next }) => {
+  if (process.env.NODE_ENV === "production") {
+    throw new TRPCError({ code: "FORBIDDEN" });
+  }
+  return next();
+});

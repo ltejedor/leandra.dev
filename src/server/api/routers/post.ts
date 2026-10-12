@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, devOnlyProcedure, publicProcedure } from "~/server/api/trpc";
 import { generateHTML } from '@tiptap/html/server';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -78,7 +78,7 @@ export const postRouter = createTRPCRouter({
         where: { slug: input.slug },
       });
 
-      if (!post) return null;
+      if (!post?.published) return null;
 
       // Handle case where content might be null
       if (!post.content) {
@@ -152,7 +152,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   // Admin: Get all posts (including unpublished)
-  getAll: publicProcedure
+  getAll: devOnlyProcedure
     .query(async ({ ctx }) => {
       return ctx.db.post.findMany({
         orderBy: { updatedAt: "desc" },
@@ -169,7 +169,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   // Admin: Get single post for editing
-  getForEdit: publicProcedure
+  getForEdit: devOnlyProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ ctx, input }) => {
       return ctx.db.post.findUnique({
@@ -178,7 +178,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   // Admin: Create or update post
-  upsert: publicProcedure
+  upsert: devOnlyProcedure
     .input(z.object({
       slug: z.string().min(1),
       title: z.string().min(1),
@@ -206,7 +206,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   // Admin: Delete post
-  delete: publicProcedure
+  delete: devOnlyProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.post.delete({
@@ -215,7 +215,7 @@ export const postRouter = createTRPCRouter({
     }),
 
   // Admin: Toggle publish status
-  togglePublish: publicProcedure
+  togglePublish: devOnlyProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const post = await ctx.db.post.findUnique({
